@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-lazy-init="false">
+    <!--
+    You can also control lazy-initialization at the container level by using the default-lazy-init
+    attribute on the <beans/> element;
+    -->
+
+    <!--
+    By default, ApplicationContext implementations eagerly create and configure all singleton beans as
+    part of the initialization process. Generally, this pre-instantiation is desirable, because errors in the
+    configuration or surrounding environment are discovered immediately, as opposed to hours or
+    even days later. When this behavior is not desirable, you can prevent pre-instantiation of a
+    singleton bean by marking the bean definition as lazy-initialized. A lazy-initialized bean tells the
+    IoC container to create a bean instance when it is first requested, rather than at startup.
+    -->
+    <!--使用懒加载-->
+    <bean id="lazyA" class="pers.penglan.ioc.entity.begin.A" lazy-init="true"></bean>
+    <bean id="lazyB" class="pers.penglan.ioc.entity.begin.B" lazy-init="true"></bean>
+</beans>

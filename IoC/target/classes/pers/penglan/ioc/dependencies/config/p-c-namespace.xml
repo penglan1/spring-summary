@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--使用p命名空间来简化配置-->
+    <bean id="pAndCNamespace" class="pers.penglan.ioc.entity.dependencies.PAndCNamespace"
+          p:user="关羽"
+          p:password="guangyu123"
+          p:VIP="true"></bean>
+    <!--使用c命名空间来简化配置-->
+    <!--未使用索引，位置可以任意，只要不出现有歧义的构造函数，容器都可以自己进行匹配定位正确的那个函数-->
+    <bean id="pAndCNamespace2" class="pers.penglan.ioc.entity.dependencies.PAndCNamespace"
+          c:isVIP="true"
+          c:user="张飞"
+          c:password="zhangfei123"/>
+
+</beans>

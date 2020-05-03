@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/mvc
+            http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--开启注解扫描-->
+    <context:component-scan base-package="pers.penglan.springmvc.controller"></context:component-scan>
+
+    <!--配置视图解析器（无需注册，因为使用的是spring mvc提供的类，并非自定义的）-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/viewpages/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--配置自定以的类型转换器-->
+    <!--注意：配置之后还需要在mvc:annotation-driven标签中向spring mvc注册该组件-->
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="pers.penglan.springmvc.utils.convert.StringToDate"/>
+            </set>
+        </property>
+    </bean>
+
+    <!--配置文件解析器，注意：id是固定的-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10485762"/>
+        <property name="defaultEncoding" value="utf-8"></property>
+        <property name="maxInMemorySize" value="40960"></property>
+        <!--<property name="uploadTempDir" value=""/>-->
+    </bean>
+
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--指定拦截的具体方法-->
+            <mvc:mapping path="/login/**"/>
+            <!--<mvc:exclude-mapping path=""/>-->
+            <bean class="pers.penglan.springmvc.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+        <!--<mvc:interceptor>
+            &lt;!&ndash;指定拦截的具体方法&ndash;&gt;
+            <mvc:mapping path="/login/"/>
+            &lt;!&ndash;<mvc:exclude-mapping path=""/>&ndash;&gt;
+            <bean class="pers.penglan.springmvc.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>-->
+    </mvc:interceptors>
+
+
+    <!--
+    开启SpringMVC框架注解的支持
+    在SpringMVC各个组件中：处理器映射器、处理器适配器、视图解析器称为SpringMVC三大组件。
+    使用<mvc:annotation-driven/>将自动加载RequestMappingHandlerMapping(处理器映射器），和
+    RequestMappingHandlerAdapter（处理器适配器），可用在springmvc.xml配置文件中使用<mvc:annotation-driven/>替代
+    注解处理器和适配器的配置。
+    -->
+    <!--
+    conversion-service:
+    The bean name of the ConversionService that is to be used for type conversion during field binding.
+	This attribute is not required, and only needs to be specified if custom converters need to be configured.
+	If not specified, a default FormattingConversionService is registered with converters to/from common value
+	types.
+    -->
+    <mvc:annotation-driven conversion-service="conversionService"/>
+    <!--告诉spring，哪些静态资源不需要过滤-->
+    <mvc:resources mapping="/lib/**" location="/lib/"/>
+
+
+</beans>

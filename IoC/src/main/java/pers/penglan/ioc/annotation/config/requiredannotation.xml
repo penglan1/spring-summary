@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--
+    注册RequiredAnnotationBeanPostProcessor处理器，配合@Required注解使用，用于检查标记了@Required注解的set方法
+    是否被调用
+    -->
+    <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
+
+    <bean id="requiredAnnotion" class="pers.penglan.ioc.entity.annotation.RequiredAnnotation">
+        <property name="name" value="刘备"/>
+        <property name="rank" value="1"/>
+    </bean>
+</beans>

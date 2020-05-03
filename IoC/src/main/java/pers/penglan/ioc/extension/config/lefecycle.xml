@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-init-method="init" default-destroy-method="destroy">
+    <!--通过配置文件来指定初始化方法和销毁时方法，与java代码解耦-->
+    <bean id="lifecycle" class="pers.penglan.ioc.entity.extension.Lifecycle"
+          init-method="init"
+          destroy-method="destroy">
+        <property name="name" value="马超"/>
+    </bean>
+
+    <!--没有指明初始化方法和销毁时方法，默认会使用配置文件beans中配置的全局的方法-->
+    <bean id="lifecycle2" class="pers.penglan.ioc.entity.extension.Lifecycle">
+        <property name="name" value="赵云"/>
+    </bean>
+</beans>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+    <!--
+    Activates various annotations to be detected in bean classes: Spring's @Required and
+	@Autowired, as well as JSR 250's @PostConstruct, @PreDestroy and @Resource (if available),
+	JAX-WS's @WebServiceRef (if available), EJB 3's @EJB (if available), and JPA's
+	@PersistenceContext and @PersistenceUnit (if available).
+
+	Alternatively, you may choose to activate the individual BeanPostProcessors for those annotations.
+	注意：@Required注解必须要使用RequiredAnnotationBeanPostProcessor处理器才能有用。这个可能是一个bug。
+    -->
+    <context:annotation-config/>
+
+    <bean id="a" class="pers.penglan.ioc.entity.begin.A">
+        <property name="name" value="诸葛亮"/>
+    </bean>
+
+    <bean id="autowiredAnno" class="pers.penglan.ioc.entity.annotation.AutowiredAnno"/>
+
+    <!--当使用autowired注解有多个符合类型的候选bean时，使用这个（标记了primary=true）-->
+    <bean class="java.lang.String" primary="true">
+        <constructor-arg value="刘备-name"/>
+    </bean>
+
+    <bean class="java.lang.String">
+        <constructor-arg value="刘备-key"/>
+    </bean>
+
+    <bean class="java.lang.Integer">
+        <constructor-arg value="45"/>
+    </bean>
+
+
+
+</beans>

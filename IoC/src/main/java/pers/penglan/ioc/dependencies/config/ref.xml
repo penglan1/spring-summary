@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="aRef" class="pers.penglan.ioc.entity.begin.A">
+        <property name="name" value="A"/>
+    </bean>
+
+    <bean id="ref" class="pers.penglan.ioc.entity.dependencies.Ref">
+        <property name="id" value="123"/>
+        <property name="display">
+            <idref bean="aRef"/>
+        </property>
+        <!--<property name="a" value="aRef"/>-->
+        <property name="a">
+            <ref bean="aRef"/>
+        </property>
+    </bean>
+</beans>

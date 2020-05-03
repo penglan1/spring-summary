@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+    You can always use fully qualified resource locations instead of relative paths: for
+    example, "file:C:/config/services.xml" or "classpath:/config/services.xml". However,
+    be aware that you are coupling your application’s configuration to specific
+    absolute locations. It is generally preferable to keep an indirection for such
+    absolute locations, for example, through "${…}" placeholders that are resolved
+    against JVM system properties at runtime.
+    -->
+    <import resource="a.xml"/>
+    <import resource="classpath:pers/penglan/ioc/begin/config/b.xmlg/b.xml"/>
+</beans>

@@ -1,0 +1,20 @@
+1. 常用的web服务器：
+  1. 应用服务器： IIS, Apache
+  2. Jsp/Servlet容器：Tomcat
+
+2. LAMP: Linux, Apache, Mysql, PHP
+
+3. 每一个Web应用程序都有一个Context.xml，如果没有，就使用容器全局的Context.xml
+   每一个Web应用程序都有一个web.xml文件，用全局的web.xml文件配置的是对所有的web应用程序都公用的配置
+
+4. Apache-tomcat-9.06的目录结构
+  bin: 批处理文件
+  conf: 各种配置文件
+    context.xml: 全局的web应用环境配置文件
+    server.xml: tomcat容器的配置文件
+    web.xml: 全局的所有web应用程序公用的配置信息
+  lib: tomcat的jar
+  logs: 日志文件
+  temp: 临时文件的存放位置
+  webapps: web应用程序的存放位置
+  work: web应用程序运行时的工作空间（有点像java里的bin目录）

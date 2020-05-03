@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+    <!--
+    the org.springframework.beans.factory.config.BeanFactoryPostProcessor. The semantics of this
+    interface are similar to those of the BeanPostProcessor, with one major difference:
+    BeanFactoryPostProcessor operates on the bean configuration metadata; that is, the Spring IoC
+    container allows a BeanFactoryPostProcessor to read the configuration metadata and potentially
+    change it before the container instantiates any beans other than BeanFactoryPostProcessors.
+    -->
+    <!--spring 3.0之前使用的是PropertyPlaceHolderConfigurer，现在被淘汰了，不推荐使用这个-->
+    <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations" value="classpath:pers/penglan/ioc/extension/config/jdbc-config.properties"/>
+    </bean>-->
+
+    <!--spring 3.1之后推荐使用这个，PropertySourcesPlaceholderConfigurer使用来代替前者的-->
+    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <property name="locations" value="classpath:pers/penglan/ioc/extension/config/jdbc-config.properties"/>
+        <property name="order" value="1"/>
+    </bean>
+
+    <!--更简便的方式，可以使用下面的方式-->
+
+    <!--
+    Activates replacement of ${...} placeholders by registering a
+	PropertySourcesPlaceholderConfigurer within the application context. Properties will
+	be resolved against the specified properties file or Properties object - so called
+	"local properties", if any, and against the Spring Environment's current set of
+	PropertySources.
+
+	Note that as of Spring 3.1 the system-properties-mode attribute has been removed in
+	favor of the more flexible PropertySources mechanism. However, applications may
+	continue to use the 3.0 (and older) versions of the spring-context schema in order
+	to preserve system-properties-mode behavior. In this case, the traditional
+	PropertyPlaceholderConfigurer component will be registered instead of the newer
+	PropertySourcesPlaceholderConfigurer.
+    -->
+    <context:property-placeholder
+            location="classpath:pers/penglan/ioc/extension/config/jdbc-config2.properties"
+            order="0"/>
+
+
+
+    <bean id="myDataSource" class="pers.penglan.ioc.entity.extension.MyDataSoure">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!--
+    The PropertyOverrideConfigurer, another bean factory post-processor, resembles the
+    PropertyPlaceholderConfigurer, but unlike the latter, the original definitions can have default values
+    or no values at all for bean properties. If an overriding Properties file does not have an entry for a
+    certain bean property, the default context definition is used.
+    -->
+    <bean class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
+        <property name="locations" value="classpath:pers/penglan/ioc/extension/config/override.properties"/>
+        <property name="order" value="0"/>
+    </bean>
+
+    <!--
+    With the context namespace introduced in Spring 2.5, it is possible to configure property overriding
+    with a dedicated configuration element:
+    -->
+    <context:property-override location="classpath:pers/penglan/ioc/extension/config/override2.properties"/>
+</beans>

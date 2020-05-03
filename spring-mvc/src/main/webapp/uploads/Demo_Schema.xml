@@ -1,0 +1,39 @@
+<!xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:element name="用户信息">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="用户">
+	    <xs:complexType>
+		  <xs:sequence>
+		    <xs:element name="用户编码">
+			  <xs:restriction base="xs:string">
+			    <xs:maxLength value="8"/>
+			  </xs:restriction>
+			</xs:element>
+			<xs:element name="用户姓名">
+			  <xs:restriction base="xs:string">
+			    <xs:length value="6"/>
+			  </xs:restriction>
+			</xs:element>
+			<xs:element name="性别">
+			  <xs:restriction base="xs:string">
+			    <xs:enumeration value="男"/>
+				<xs:enumeration value="女"/>
+			  </xs:restriction>
+			</xs:element name="职称">
+			  <xs:restriction base="xs:string">
+			    <xs:enumeration value="助理工程师"/>
+				<xs:enumeration value="工程师"/>
+				<xs:enumeration value="高级工程师"/>
+			  </xs:restriction>
+			</xs:element>
+		  </xs:sequence>
+		</xs:complexType>
+	  </xs:element>
+	</xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+</xs:schema>

@@ -1,0 +1,24 @@
+1. Spring中的资源访问利器 Resource
+  1) PathResource
+  2) ClassPathResource
+  3) ServletContextResource
+  ...
+
+  资源加载时默认使用项目的编码读取资源的内容。如果资源文件采用特殊的编码格式，那么可以通过EncodedResource对资源进行编码，以保证资源内容操作的正确性。
+
+2. 仅通过资源地址的特殊标识就可以访问相应的资源
+  1) "classpath:" 使用ClassPathResource从类路径中加载资源
+    还有一个更加强大的 "classpath*:"。
+  2) "file:" 使用UrlResource从文件系统目录中加载资源，可采用绝对会相对路径。
+  3) "http://" 使用UrlResource从web服务器中加载资源
+  4) "ftp://" 使用UrlResource从FTP服务器中加载资源
+  5) 没有任何的前缀，根据ApplicationContext的具体实现类采用相对应类型的Resource。
+
+  ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+  Resource resource = resolver.getResource("classpath:leaning/Spring随笔.txt");
+  
+  InputStream in = resource.getInputStream();
+  // 尽量不要使用 resource.getFile();
+
+  注意：资源配置文件一般是再文件夹下的，所以resource.getFile()是可以正常工作的。但在发布时，如果资源配置文件被打包到JAR包中，这时getFile()就无法读取了，从而造成部署实施的时候出现意想不到的问题。因此，建议尽量以流的方式读取，避免环境不同造成的问题。
+

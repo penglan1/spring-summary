@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--使用数据库连接时，需要先注册驱动。可以利用 depends-on 属性来完成-->
+    <bean id="connector" class="pers.penglan.ioc.entity.begin.A" depends-on="driver"></bean>
+    <bean id="driver" class="pers.penglan.ioc.entity.begin.B"/>
+</beans>

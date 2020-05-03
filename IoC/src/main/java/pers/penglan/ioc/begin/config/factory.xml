@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--实例工厂-->
+    <bean id="instanceFactory" class="pers.penglan.ioc.entity.begin.InstanceFactory"></bean>
+    <bean id="b" factory-bean="instanceFactory" factory-method="createB"></bean>
+    <!--有构造参数的实例工厂-->
+    <bean id="b2" factory-bean="instanceFactory" factory-method="createB">
+        <constructor-arg index="0" type="java.lang.String" value="使用实例工厂+构造注入"/>
+    </bean>
+
+    <!--静态工厂-->
+    <bean id="a" class="pers.penglan.ioc.entity.begin.StaticFactory"
+          factory-method="createA"></bean>
+    <!--有构造参数的静态工厂-->
+    <bean id="a2" class="pers.penglan.ioc.entity.begin.StaticFactory"
+          factory-method="createA">
+        <constructor-arg index="0" type="java.lang.String" value="使用静态工厂+构造注入"/>
+    </bean>
+</beans>
